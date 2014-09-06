@@ -1,6 +1,10 @@
 (ns com.stuartsierra.dependency-test
-  (:use clojure.test
-        com.stuartsierra.dependency))
+  #+clj (:require [clojure.test :as t :refer (is deftest)]
+                  [com.stuartsierra.dependency :refer :all])
+  #+cljs (:require-macros [cemerick.cljs.test :refer (is deftest)]
+                          [com.stuartsierra.dependency
+                             :refer
+                             (graph depend transitive-dependents transitive-dependencies)]))
 
 ;; building a graph like:
 ;;
