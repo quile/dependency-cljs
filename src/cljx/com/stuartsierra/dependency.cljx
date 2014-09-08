@@ -141,5 +141,5 @@
   [graph]
   (let [pos (zipmap (topo-sort graph) (range))]
     (fn [a b]
-      (compare (get pos a #+clj Long/MAX_VALUE #+cljs (. js/Number MAX_VALUE))
-               (get pos b #+clj Long/MAX_VALUE #+cljs (. js/Number MAX_VALUE))))))
+      (compare (get pos a #+clj Long/MAX_VALUE #+cljs (aget js/Number "MAX_VALUE"))
+               (get pos b #+clj Long/MAX_VALUE #+cljs (aget js/Number "MAX_VALUE"))))))

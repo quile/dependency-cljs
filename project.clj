@@ -20,12 +20,22 @@
                    :output-path "target/test-classes"
                    :rules :cljs}]}
 
-  :cljsbuild {:test-commands {"node" ["node" :node-runner "target/testable.js"]}
-              :builds [{:source-paths ["target/classes" "target/test-classes"]
-                        :compiler {:output-to "target/testable.js"
+  :cljsbuild {:test-commands {"tests"         ["phantomjs" "test/bin/runner-none.js"       "target/dependency"       "target/dependency.js"]
+                              "node-tests"    ["node"      "test-node/bin/runner-none.js"  "target/test-node"  "target/test-node.js"]}
+              :builds [{:id "dependency"
+                        :source-paths ["target/classes"]
+                        :compiler {:output-to "target/dependency.js"
                                    :optimizations :simple
                                    :target :nodejs
-                                   :pretty-print true}}]}
+                                   :pretty-print true}}
+                       {:id "test-node"
+                        :source-paths ["target/classes" "target/test-classes"]
+                        :compiler {:output-to     "target/test-node.js"
+                                   :target :nodejs ;;; this target required for node, plus a *main* defined in the tests.
+                                   :output-dir    "target/test-node"
+                                   :optimizations :none
+                                   :pretty-print  true}}
+                       ]}
 
   :profiles {:dev {:hooks        [cljx.hooks]
                    :test-paths   ["target/test-classes"]
@@ -33,6 +43,7 @@
                                   [org.clojure/clojurescript "0.0-2311"]]
                    :plugins      [[com.keminglabs/cljx "0.4.0" :exclusions [org.clojure/clojure]]
                                   [com.cemerick/clojurescript.test "0.3.1"]
+                                  [org.bodil/lein-noderepl "0.1.11"]
                                   [lein-cljsbuild "1.0.4-SNAPSHOT"]]}
              :clj-1.4.0 {:dependencies [[org.clojure/clojure "1.4.0"]]}
              :clj-1.3.0 {:dependencies [[org.clojure/clojure "1.3.0"]]}})

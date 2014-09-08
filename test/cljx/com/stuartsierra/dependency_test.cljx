@@ -1,10 +1,11 @@
 (ns com.stuartsierra.dependency-test
   #+clj (:require [clojure.test :as t :refer (is deftest)]
                   [com.stuartsierra.dependency :refer :all])
-  #+cljs (:require-macros [cemerick.cljs.test :refer (is deftest)]
-                          [com.stuartsierra.dependency
-                             :refer
-                             (graph depend transitive-dependents transitive-dependencies)]))
+  #+cljs (:require-macros [cemerick.cljs.test :refer (is deftest)])
+  #+cljs (:require cemerick.cljs.test
+                   [com.stuartsierra.dependency :refer
+                             (graph depend transitive-dependents transitive-dependencies topo-sort topo-comparator)])
+  )
 
 ;; building a graph like:
 ;;
@@ -68,14 +69,16 @@
          (topo-sort g2))))
 
 (deftest t-no-cycles
-  (is (thrown? Exception
+  (is (thrown? #+clj Exception #+cljs js/Error
                (-> (graph)
                    (depend :a :b)
                    (depend :b :c)
                    (depend :c :a)))))
 
 (deftest t-no-self-cycles
-  (is (thrown? Exception
+  (is (thrown? #+clj Exception #+cljs js/Error
                (-> (graph)
                    (depend :a :b)
                    (depend :a :a)))))
+
+#+cljs (set! *main-cli-fn* #()) ;; node.js fu
