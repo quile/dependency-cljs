@@ -1,4 +1,4 @@
-(defproject com.stuartsierra/dependency "0.1.2-SNAPSHOT"
+(defproject com.stuartsierra/dependency "0.1.4-SNAPSHOT"
   :description "A data structure for representing dependency graphs"
   :url "https://github.com/stuartsierra/dependency"
   :license {:name "Eclipse Public License"
@@ -20,7 +20,7 @@
                    :output-path "target/test-classes"
                    :rules :cljs}]}
 
-  :cljsbuild {:test-commands {"tests"         ["phantomjs" "test/bin/runner-none.js"       "target/dependency"       "target/dependency.js"]
+  :cljsbuild {:test-commands {"tests"         ["phantomjs" "test/bin/runner-none.js"       "target/test"       "target/test.js"]
                               "node-tests"    ["node"      "test-node/bin/runner-none.js"  "target/test-node"  "target/test-node.js"]}
               :builds [{:id "dependency"
                         :source-paths ["target/classes"]
@@ -40,7 +40,7 @@
   :profiles {:dev {:hooks        [cljx.hooks]
                    :test-paths   ["target/test-classes"]
                    :dependencies [[org.clojure/clojure "1.6.0"]
-                                  [org.clojure/clojurescript "0.0-2311"]]
+                                  [org.clojure/clojurescript "0.0-2322"]]
                    :plugins      [[com.keminglabs/cljx "0.4.0" :exclusions [org.clojure/clojure]]
                                   [com.cemerick/clojurescript.test "0.3.1"]
                                   [org.bodil/lein-noderepl "0.1.11"]
