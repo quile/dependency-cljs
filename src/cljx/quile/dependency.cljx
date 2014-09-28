@@ -8,7 +8,7 @@
 
 (ns ^{:author "Stuart Sierra"
       :doc "Directed acyclic graph for representing dependency relationships."}
-  com.stuartsierra.dependency
+  quile.dependency
   (:require [clojure.set :as set]))
 
 (defprotocol DependencyGraph

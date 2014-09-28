@@ -1,6 +1,6 @@
-(defproject com.stuartsierra/dependency "0.1.4-SNAPSHOT"
+(defproject quile/dependency-cljs "0.1.4"
   :description "A data structure for representing dependency graphs"
-  :url "https://github.com/stuartsierra/dependency"
+  :url "https://github.com/quile/dependency-cljs"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
@@ -20,8 +20,7 @@
                    :output-path "target/test-classes"
                    :rules :cljs}]}
 
-  :cljsbuild {:test-commands {"tests"         ["phantomjs" "test/bin/runner-none.js"       "target/test"       "target/test.js"]
-                              "node-tests"    ["node"      "test-node/bin/runner-none.js"  "target/test-node"  "target/test-node.js"]}
+  :cljsbuild {:test-commands {"node"    ["node" "test-node/bin/runner-none.js" "target/test-node" "target/test-node.js"]}
               :builds [{:id "dependency"
                         :source-paths ["target/classes"]
                         :compiler {:output-to "target/dependency.js"

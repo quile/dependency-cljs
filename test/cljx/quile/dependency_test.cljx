@@ -1,9 +1,9 @@
-(ns com.stuartsierra.dependency-test
+(ns quile.dependency-test
   #+clj (:require [clojure.test :as t :refer (is deftest)]
-                  [com.stuartsierra.dependency :refer :all])
+                  [quile.dependency :refer :all])
   #+cljs (:require-macros [cemerick.cljs.test :refer (is deftest)])
   #+cljs (:require cemerick.cljs.test
-                   [com.stuartsierra.dependency :refer
+                   [quile.dependency :refer
                              (graph depend transitive-dependents transitive-dependencies topo-sort topo-comparator)])
   )
 
